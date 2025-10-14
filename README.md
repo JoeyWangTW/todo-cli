@@ -1,16 +1,27 @@
 # todo-cli
 
-A terminal-based todo application that automatically spawns AI agents for each task using tmux and Gemini CLI.
+> The todo app that actually gets things done.
+
+A terminal-based task manager where AI agents finish your todos for you. Powered by Gemini CLI and MCP tools.
+Why?
+The best todo list isn't one that tracks tasks—it's one that completes them.
+Inspired by [claude-squad](https://github.com/smtg-ai/claude-squad?tab=readme-ov-file), todo-cli runs multiple AI agents in parallel, each working on a different task. But instead of coding agents, these are personal assistant agents that can:
+
+- 📧 Check your email and make phone calls
+- 🗺️ Search for services and request quotes
+- 📅 Schedule meetings and manage your calendar
+- 🔍 Research topics and compile reports
+  ...and anything else you can describe in a prompt
 
 ## Features
 
 - 📋 **Terminal UI** - Full-screen todo list built with blessed
 - 🤖 **AI Agent Integration** - Each task automatically gets a Gemini CLI agent in a tmux session
 - 👀 **Real-time Preview** - Watch agent output in split-screen view (40/60 layout)
-- ⌨️  **Keyboard-driven** - Vim-like navigation and shortcuts
+- ⌨️ **Keyboard-driven** - Vim-like navigation and shortcuts
 - 💾 **Persistent Storage** - Tasks saved to `~/.config/todo-cli/tasks.json`
 - 🎯 **YOLO Mode** - Optional auto-approval for agent actions
-- ✏️  **External Editor** - Press Ctrl+E to edit in vim/nano
+- ✏️ **External Editor** - Press Ctrl+E to edit in vim/nano
 
 ## Prerequisites
 
@@ -18,28 +29,49 @@ A terminal-based todo application that automatically spawns AI agents for each t
 - **tmux 2.6+** - Install with `brew install tmux` (macOS) or `apt install tmux` (Linux)
 - **Gemini CLI** - Follow installation at https://ai.google.dev/gemini-api/docs/cli
 
-## Installation
-
-```bash
-npm install
-npm link  # For global access
-```
-
-Or run directly:
-```bash
-npm start
-```
-
 ## Usage
 
-Start the application:
+### Setup Gemini-cli:
+
+#### Allow Gemini-cli to use custom system prompt under `.gemini`
+
 ```bash
-todo-cli
+cp .env.example .env
+```
+
+There is an example `system.md` under `.gemini`, it includes [ElevenLabs Agent prompting guide](https://elevenlabs.io/docs/agents-platform/best-practices/prompting-guide) to optimize phone calls. Update the system prompt to adjust what you want to agent to do
+
+#### Setup tools
+
+Setup [MCP](https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md) or [Extention](https://geminicli.com/extensions/) to extend agent capability
+
+Some useful MCPs:
+
+- [Google Map](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/google-maps) to get location data
+- [Gmail](https://github.com/GongRzhe/Gmail-MCP-Server) to access gmail, get information or send out email
+- [Google Calendar](https://github.com/GongRzhe/Gmail-MCP-Server) to access calendar, get events or update calendar
+- [Eleven Labs](https://github.com/elevenlabs/elevenlabs-mcp) to create conversational agents for phone calls
+
+**Note:** MCP servers run with the same permissions as your user account. Only connect to trusted MCP servers and review their code before use.
+
+### Provide Context for Your Agent
+
+Create text files in the `/user_data` directory to give your agent access to important information. The agent can read these files when needed using Gemini CLI's built-in file reading and search capabilities.
+
+This simple file-based approach provides persistent memory - your preferences, account details, and context are stored as regular text files that you can easily view and edit.
+
+### Start using
+
+Start the application:
+
+```bash
+npm start
 ```
 
 ### Keyboard Shortcuts
 
 #### Task Management
+
 - `a` - Add new task (title → details → YOLO mode)
 - `Enter` - Open/attach to agent session (Ctrl+q to return)
 - `x` - Toggle task done/undone
@@ -47,14 +79,17 @@ todo-cli
 - `j/k` or `↑/↓` - Navigate tasks
 
 #### Preview Navigation
+
 - `[` - Scroll preview up
 - `]` - Scroll preview down
 - `g` - Jump to bottom of preview
 
 #### Application
+
 - `q` - Quit application
 
 #### Input Modal
+
 - `Enter` - Submit and move to next step
 - `Ctrl+E` - Open external editor ($EDITOR) for full cursor control
 - `Escape` - Cancel
@@ -129,11 +164,12 @@ todo-cli/
 - **Session Isolation**: Each task runs in an isolated tmux session that persists until deleted
 - **Clean Termination**: When you delete a task, its tmux session is automatically killed
 
-## Notes
+## Next steps
 
-- Tasks are stored in `~/.config/todo-cli/tasks.json`
-- View all sessions: `tmux ls`
-- Kill session manually: `tmux kill-session -t gemini-task-{id}`
+- Come up with a better approach to manage personal info as context.
+- Allow using different agent (codex, claude-code) if they have a way to replace the system prompt
+- Communicate between agent and todo tasks, right now gemini-cli doesn't have hooks, so there's no direct way check if the task is done or not. Still needs manual update
+- Better MCP/Extension installation, right now its still cumbersome to setup
 
 ## License
 
