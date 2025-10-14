@@ -1,7 +1,7 @@
 import { spawn } from 'child_process';
 
 class TmuxService {
-  async createSession(sessionName, prompt, workDir = process.cwd(), width = 80, height = 24) {
+  async createSession(sessionName, prompt, workDir = process.cwd(), width = 80, height = 24, yoloMode = false) {
     return new Promise((resolve, reject) => {
       // Use -i flag to start interactive mode with initial prompt
       // Set window size to match preview box dimensions
@@ -13,6 +13,11 @@ class TmuxService {
         '-c', workDir,
         'gemini', '-i', prompt
       ];
+
+      // Add --yolo flag if YOLO mode is enabled
+      if (yoloMode) {
+        args.push('--yolo');
+      }
 
       const proc = spawn('tmux', args);
       let stderr = '';

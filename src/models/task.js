@@ -1,11 +1,12 @@
 import { nanoid } from 'nanoid';
 
 class Task {
-  constructor(title, details = '') {
+  constructor(title, details = '', yoloMode = false) {
     this.id = nanoid();
     this.title = title.trim();
     this.details = details.trim();
     this.done = false;
+    this.yoloMode = yoloMode;
     this.sessionName = `gemini-task-${this.id}`;
     this.createdAt = new Date().toISOString();
 
@@ -40,6 +41,7 @@ class Task {
       title: this.title,
       details: this.details,
       done: this.done,
+      yoloMode: this.yoloMode,
       sessionName: this.sessionName,
       createdAt: this.createdAt
     };

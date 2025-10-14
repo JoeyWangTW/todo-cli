@@ -32,8 +32,8 @@ class TodoApp {
     this.ui.screen.key(['a'], () => {
       showAddTaskModal(
         this.ui.screen,
-        async (title, details) => {
-          await this.addTask(title, details);
+        async (title, details, yoloMode) => {
+          await this.addTask(title, details, yoloMode);
         },
         () => {
           this.ui.taskList.focus();
@@ -92,8 +92,8 @@ class TodoApp {
     });
   }
 
-  async addTask(title, details) {
-    const task = new Task(title, details);
+  async addTask(title, details, yoloMode = false) {
+    const task = new Task(title, details, yoloMode);
     this.tasks.push(task);
 
     try {
@@ -108,7 +108,7 @@ class TodoApp {
 
       this.showStatus(`Creating session (${width}x${height})...`);
 
-      await this.tmux.createSession(task.sessionName, task.buildPrompt(), process.cwd(), width, height);
+      await this.tmux.createSession(task.sessionName, task.buildPrompt(), process.cwd(), width, height, yoloMode);
       this.showStatus(`✓ Task created: ${task.sessionName}`);
     } catch (err) {
       this.showStatus(`✗ Error creating session: ${err.message}`);
