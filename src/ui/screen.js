@@ -68,7 +68,7 @@ class UIManager {
       bottom: 0,
       width: '100%',
       height: 1,
-      content: ' [a]Add [Enter]Open session(Ctrl+q to quit) [x]Done [d]Delete | "["/""]" Scroll up/down  [g]Jump to bottom | [q]Quit',
+      content: ' [a]Add [Enter]Open session(Ctrl+q to return) [x]Done [d]Delete | "["/""]" Scroll up/down  [g]Jump to bottom | [q]Quit',
       style: {
         bg: 'black',
         fg: 'cyan'

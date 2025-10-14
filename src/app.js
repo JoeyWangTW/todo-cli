@@ -197,6 +197,7 @@ class TodoApp {
   updateUI() {
     if (this.tasks.length === 0) {
       this.ui.taskList.setContent('\n No tasks yet\n\n Press [a] to add a task');
+      this.ui.previewBox.setContent('\n [No task selected]');
     } else {
       const lines = this.tasks.map((task, index) => {
         const checkbox = task.done ? '' : '';
