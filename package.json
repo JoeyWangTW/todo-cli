@@ -1,0 +1,21 @@
+{
+  "name": "todo-cli",
+  "version": "1.0.0",
+  "description": "Terminal-based todo list with Gemini agent integration",
+  "type": "module",
+  "main": "src/app.js",
+  "bin": {
+    "todo-cli": "./bin/todo-cli.js"
+  },
+  "scripts": {
+    "start": "node bin/todo-cli.js"
+  },
+  "keywords": ["todo", "cli", "gemini", "tmux", "terminal"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "lowdb": "^7.0.1",
+    "nanoid": "^5.0.4"
+  }
+}
