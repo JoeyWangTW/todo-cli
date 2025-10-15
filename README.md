@@ -13,6 +13,8 @@ Inspired by [claude-squad](https://github.com/smtg-ai/claude-squad?tab=readme-ov
 - 🔍 Research topics and compile reports
   ...and anything else you can describe in a prompt
 
+![demo](/demo/todo-cli-demo.gif)
+
 ## Features
 
 - 📋 **Terminal UI** - Full-screen todo list built with blessed
