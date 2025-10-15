@@ -5,7 +5,7 @@
 A terminal-based task manager where AI agents finish your todos for you. Powered by Gemini CLI and MCP tools.
 Why?
 The best todo list isn't one that tracks tasks—it's one that completes them.
-Inspired by [claude-squad](https://github.com/smtg-ai/claude-squad?tab=readme-ov-file), todo-cli runs multiple AI agents in parallel, each working on a different task. But instead of coding agents, these are personal assistant agents that can:
+Inspired by [claude-squad](https://github.com/smtg-ai/claude-squad) and [Conductor](https://conductor.build/), todo-cli runs multiple AI agents in parallel, each working on a different task. But instead of coding agents, these are personal assistant agents that can:
 
 - 📧 Check your email and make phone calls
 - 🗺️ Search for services and request quotes
@@ -28,8 +28,8 @@ Inspired by [claude-squad](https://github.com/smtg-ai/claude-squad?tab=readme-ov
 ## Prerequisites
 
 - **Node.js v18+**
-- **tmux 2.6+** - Install with `brew install tmux` (macOS) or `apt install tmux` (Linux)
-- **Gemini CLI** - Follow installation at https://ai.google.dev/gemini-api/docs/cli
+- **tmux** - [Installation Guide](https://github.com/tmux/tmux/wiki/Installing)
+- **[Gemini CLI](https://geminicli.com/)**
 
 ## Usage
 
